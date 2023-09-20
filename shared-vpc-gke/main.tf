@@ -34,12 +34,12 @@ module "project-host" {
   # }
 }
 
-module "project-svc-gke-dev" {
+module "project-svc-gke" {
   source          = "../modules/project"
   parent          = var.root_node
   billing_account = var.billing_account_id
   prefix          = var.prefix
-  name            = "gke-dev"
+  name            = "gke"
   services        = var.project_services
   shared_vpc_service_config = {
     host_project = module.project-host.project_id
@@ -53,12 +53,12 @@ module "project-svc-gke-dev" {
   # }
 }
 
-module "project-svc-gke-prod" {
+module "project-svc-gke-onprem" {
   source          = "../modules/project"
   parent          = var.root_node
   billing_account = var.billing_account_id
   prefix          = var.prefix
-  name            = "gke-prod"
+  name            = "gke-onprem"
   services        = var.project_services
   shared_vpc_service_config = {
     host_project = module.project-host.project_id
