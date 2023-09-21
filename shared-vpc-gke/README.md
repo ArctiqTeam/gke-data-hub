@@ -48,7 +48,16 @@ stackdriver.googleapis.com
 storage.googleapis.com
 ```
 
-For further information about GKE onprem requirements, read [here](https://cloud.google.com/anthos/clusters/docs/bare-metal/latest/installing/configure-sa)
+### Service accounts and role bindings required for GKE onPrem
+
+Service account | Purpose | Roles
+--- | --- | ---
+anthos-baremetal-gcr | Anthos clusters on bare metal uses this service account to download container images from Container Registry. | None
+anthos-baremetal-connect | Connect Agent uses this service account to maintain a connection between your cluster and Google Cloud. This enables access to the cluster and to workload management features, including the Google Cloud console and the Connect gateway to interact with your cluster. | roles/gkehub.connect
+anthos-baremetal-register | Connect Agent uses this service account to register your clusters with a fleet. | roles/gkehub.admin
+anthos-baremetal-cloud-ops | Stackdriver Agent uses this service account to export logs and metrics from clusters to Cloud Logging and Cloud Monitoring. | roles/logging.logWriter, roles/monitoring.metricWriter, roles/stackdriver.resourceMetadata.writer, roles/opsconfigmonitoring.resourceMetadata.writer, roles/monitoring.dashboardEditor
+
+For further information about GKE onprem requirements, see [here](https://cloud.google.com/anthos/clusters/docs/bare-metal/latest/installing/configure-sa)
 
 ### APIs required for fleet-managed GKE
 
@@ -60,4 +69,4 @@ cloudresourcemanager.googleapis.com
 iam.googleapis.com
 ```
 
-For further information about GKE fleet management requirements, read [here](https://cloud.google.com/anthos/fleet-management/docs/before-you-begin)
+For further information about GKE fleet management requirements, see [here](https://cloud.google.com/anthos/fleet-management/docs/before-you-begin)
